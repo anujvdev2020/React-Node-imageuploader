@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { Component,useState } from "react";
 
  const FileUploadComponent = () => {
+
     const [image,setImage]=useState("")
 
     const  onFileChange=(e)=> {
@@ -11,8 +12,11 @@ import React, { Component,useState } from "react";
    const  onSubmit=(e)=> {
         e.preventDefault()
         const formData = new FormData()
-        formData.append('image', this.state.image)
-        axios.post("http://localhost:3001/api/user-profile", formData, {
+        formData.append('image',image)
+        axios.post("http://localhost:6000/upload", formData,{
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         }).then(res => {
             console.log(res)
         })
